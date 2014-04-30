@@ -2,5 +2,5 @@ listen on lo0
 
 table aliases db:/etc/mail/aliases.db
 
-accept for local alias <aliases> deliver to mobox
+accept for local alias <aliases> deliver to mbox
 accept from local for any relay
