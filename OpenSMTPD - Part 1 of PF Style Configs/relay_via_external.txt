@@ -1,0 +1,13 @@
+listen on lo0
+
+table aliases db:/etc/mail/aliases.db
+table secrets db:/etc/mail/secrets.db
+
+# /etc/mail/secrets will have lines similar to this:
+# smtp.example.com USER@example.com:PASSWORD
+
+# allows local delivery
+accept for local alias <aliases> deliver to mobox
+
+# relays via mx1.example.comusing authentication
+accept for all relay via secure://mx1.example.com auth

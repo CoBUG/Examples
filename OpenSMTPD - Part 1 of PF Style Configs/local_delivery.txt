@@ -1,0 +1,6 @@
+listen on lo0
+
+table aliases db:/etc/mail/aliases.db
+
+accept for local alias <aliases> deliver to mobox
+accept from local for any relay
