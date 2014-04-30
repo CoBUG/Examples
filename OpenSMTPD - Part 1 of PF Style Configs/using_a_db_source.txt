@@ -1,0 +1,23 @@
+pki example.com certificate "/etc/mail/certs/example.com.crt"
+pki example.com ca "/etc/mail/certs/example.com.ca"
+pki example.com key "/etc/mail/certs/example.com.key"
+
+listen on lo0
+
+listen on example.com smtps pki example.com hostname example.com
+listen on example.com tls pki example.com hostname example.com
+
+table aliases sqlite:/etc/mail/aliases.conf
+
+accept from any for domain "example.com" alias <aliases> deliver to mbox
+# for delivery to an external application such as procmail:
+# accept from any for domain "example.com" alias <aliases> deliver to mda "/path/to/procmail -f -"
+
+# /etc/mail/aliases.conf:
+# query_alias          select alias from users where username=?;
+#
+#
+# credentials can be queried as well (if you have more than one source coming from
+# a file - it would be wise to rename it something besides aliases.conf):
+#
+# query_credentials       select username, password from users where username=?;
