@@ -1,0 +1,14 @@
+pki example.com certificate "/etc/mail/certs/example.com.crt"
+pki example.com ca "/etc/mail/certs/example.com.ca"
+pki example.com key "/etc/mail/certs/example.com.key"
+
+listen on lo0
+
+listen on example.com smtps pki example.com hostname example.com
+listen on example.com tls pki example.com hostname example.com
+
+table aliases db:/etc/mail/aliases.db
+
+accept from any for domain "example.com" alias <aliases> deliver to mbox
+# for delivery to an external application such as procmail:
+# accept from any for domain "example.com" alias <aliases> deliver to mda "/path/to/procmail -f -"
